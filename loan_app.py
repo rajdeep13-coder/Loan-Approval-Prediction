@@ -3,7 +3,10 @@ import pickle
 import numpy as np
 
 # Load trained model
-model = pickle.load(open("loan_model.pkl", "rb"))
+model = pickle.load(open("models/loan_model.pkl", "rb"))
+scaler = pickle.load(open("models/scaler.pkl", "rb"))
+encoders = pickle.load(open("models/label_encoders.pkl", "rb"))
+
 
 st.set_page_config(page_title="Loan Approval Predictor", page_icon="💳")
 
