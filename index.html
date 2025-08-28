@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loan Approval Prediction</title>
+</head>
+<body style="font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 0;">
+
+  <div style="max-width: 500px; margin: 40px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h2 style="text-align: center; color: #333;">Loan Approval Prediction</h2>
+    <form action="/predict" method="post" style="display: flex; flex-direction: column; gap: 15px;">
+
+      <label>Gender:
+        <select name="Gender" style="width: 100%; padding: 8px;">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </label>
+
+      <label>Married:
+        <select name="Married" style="width: 100%; padding: 8px;">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </label>
+
+      <label>Applicant Income:
+        <input type="number" name="ApplicantIncome" required style="width: 100%; padding: 8px;">
+      </label>
+
+      <label>Coapplicant Income:
+        <input type="number" name="CoapplicantIncome" required style="width: 100%; padding: 8px;">
+      </label>
+
+      <label>Loan Amount:
+        <input type="number" name="LoanAmount" required style="width: 100%; padding: 8px;">
+      </label>
+
+      <label>Credit History (0 or 1):
+        <input type="number" name="Credit_History" min="0" max="1" required style="width: 100%; padding: 8px;">
+      </label>
+
+      <button type="submit" style="padding: 10px; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Predict
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>
