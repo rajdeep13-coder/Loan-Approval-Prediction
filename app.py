@@ -1,4 +1,4 @@
-import pickle
+import joblib
 import numpy as np
 import pandas as pd
 from flask import Flask, request, render_template
@@ -6,15 +6,11 @@ from flask import Flask, request, render_template
 # Initialize Flask app
 app = Flask(__name__)
 
-# Load trained model, scaler, and encoders
-with open("models/loan_model.pkl", "rb") as f:
-    model = pickle.load(f)
-
-with open("models/scaler.pkl", "rb") as f:
-    scaler = pickle.load(f)
-
-with open("models/label_encoders.pkl", "rb") as f:
-    encoders = pickle.load(f)
+# Load trained model, scaler, encoders, and feature names
+model = joblib.load("models/loan_model.pkl")
+scaler = joblib.load("models/scaler.pkl")
+encoders = joblib.load("models/label_encoders.pkl")
+feature_names = joblib.load("models/feature_names.pkl")
 
 # Home page route
 @app.route("/")
@@ -38,10 +34,13 @@ def predict():
 
         # Encode categorical fields using saved encoders
         for col, encoder in encoders.items():
-            if col in df:
+            if col in df.columns:
                 df[col] = encoder.transform(df[col])
 
-        # Scale numerical features
+        # Ensure column order matches training
+        df = df[feature_names]
+
+        # Scale features
         df_scaled = scaler.transform(df)
 
         # Make prediction
